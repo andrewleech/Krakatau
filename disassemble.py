@@ -46,7 +46,11 @@ def disassembleSub(readTarget, out, targets, roundtrip=False, outputClassName=Tr
 
             output = StringIO()
             # output = sys.stdout
-            Disassembler(clsdata, output.write, roundtrip=roundtrip).disassemble()
+            try:
+                Disassembler(clsdata, output.write, roundtrip=roundtrip).disassemble()
+            except Exception as ex:
+                print(ex)
+                continue
 
             filename = out.write(name, output.getvalue())
             if filename is not None:
